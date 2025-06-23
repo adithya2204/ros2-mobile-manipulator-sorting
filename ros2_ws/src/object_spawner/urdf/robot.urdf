@@ -1,0 +1,500 @@
+<?xml version="1.0"?>
+<robot name="robot">
+
+    <link name="base_link">
+
+    </link>
+
+    <link name="dummy_link">
+        <inertial>
+            <origin xyz="0.0704 -1.2041E-05 0.00033067"
+        rpy="0 0 0" />
+            <mass value="2.0703" />
+            <inertia ixx="0.0080224" ixy="2.855E-06" ixz="4.8192E-05" iyy="0.020431" 
+        iyz="1.9696E-08" izz="0.026494" />
+        </inertial>
+        <visual name="base_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/base_link.STL" />
+            </geometry>
+            <material name="SkyBlue">
+                <color rgba="0.529 0.808 0.922 1"/>
+            </material>
+        </visual>
+        <collision name="base_link_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/base_link.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    
+
+    <joint name="base_to_dummy" type="fixed">
+        <parent link="base_link"/>
+        <child link="dummy_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 0 0" />
+    </joint>
+
+    <link name="wheel_1">
+        <inertial>
+            <origin xyz="1.0408E-16 8.8471E-17 -0.014475" 
+        rpy="0 0 0" />
+            <mass value="0.22507" />
+            <inertia ixx="0.00023199" ixy="-4.4978E-20" ixz="-8.7884E-19" iyy="0.00023199" 
+        iyz="-8.7351E-19" izz="0.0003555" />
+        </inertial>
+        <visual name="wheel_1_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_1.STL" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1" />
+            </material>
+        </visual>
+        <collision name="wheel_1_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_1.STL" />
+            </geometry>
+        </collision>
+    </link>
+  
+    <joint name="wheel_1_joint" type="continuous">
+        <origin xyz="0.145 0.14693 0" rpy="-1.5708 0 0" />
+        <parent link="base_link" />
+        <child link="wheel_1" />
+        <axis xyz="0 0 1" />
+        <limit effort="1" velocity="1" />
+        <dynamics friction="0.1" />
+    </joint>
+  
+    <link name="wheel_2">
+        <inertial>
+            <origin xyz="-6.9389E-18 -1.8215E-17 -0.014475"
+        rpy="0 0 0" />
+            <mass value="0.22507" />
+            <inertia ixx="0.00023199" ixy="-4.4978E-20" ixz="-8.7884E-19" iyy="0.00023199" 
+        iyz="-8.7351E-19" izz="0.0003555" />
+            </inertial>
+            <visual name="wheel_2_visual">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_2.STL" />
+                </geometry>
+                <material name="black">
+                    <color rgba="0 0 0 1" />
+                </material>
+            </visual>
+            <collision name="wheel_2_collusion">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_2.STL" />
+                </geometry>
+            </collision>
+    </link>
+
+    <joint name="wheel_2_joint" type="continuous">
+         <origin xyz="0.145 -0.14693 0" rpy="-1.5708 0 3.1416" />
+         <parent link="base_link" />
+         <child link="wheel_2" />
+         <axis xyz="0 0 -1" />
+         <limit effort="1" velocity="1" />
+         <dynamics friction="0.1" />
+    </joint>
+  
+    <link name="wheel_3">
+        <inertial>
+            <origin xyz="1.3878E-17 1.0408E-17 -0.014475"
+       rpy="0 0 0" />
+            <mass value="0.22507" />
+            <inertia ixx="0.00023199" ixy="-4.4978E-20" ixz="-8.7884E-19" iyy="0.00023199" 
+        iyz="-8.7351E-19" izz="0.0003555" />
+        </inertial>
+        <visual name="wheel_3_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_3.STL" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1" />
+            </material>
+        </visual>
+        <gazebo reference="wheel_3">
+            <material>Gazebo/Black</material> 
+        </gazebo>
+        <collision name="wheel_3_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_3.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="wheel_3_joint" type="continuous">
+        <origin xyz="0 0.14693 0" rpy="1.5708 0 3.1416" />
+        <parent link="base_link" />
+        <child link="wheel_3" />
+        <axis xyz="0 0 1" />
+        <limit effort="1" velocity="1" />
+        <dynamics friction="0.1" />
+    </joint>
+  
+    <link name="wheel_4">
+        <inertial>
+            <origin xyz="1.3878E-17 1.3444E-17 -0.014475"
+        rpy="0 0 0" />
+            <mass value="0.22507" />
+            <inertia ixx="0.00023199" ixy="-4.4978E-20" ixz="-8.7884E-19" iyy="0.00023199" 
+        iyz="-8.7351E-19" izz="0.0003555" />
+        </inertial>
+        <visual name="wheel_4_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_4.STL" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1" />
+            </material>
+        </visual>
+        <collision name="wheel_4_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_4.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="wheel_4_joint" type="continuous">
+        <origin xyz="0 -0.14693 0" rpy="1.5708 0 0" />
+        <parent link="base_link" />
+        <child link="wheel_4" />
+        <axis xyz="0 0 -1" />
+        <limit effort="1" velocity="1" />
+        <dynamics friction="0.1" />
+    </joint>
+  
+    <link name="shoulder">
+        <inertial>
+            <origin xyz="-0.0016558 0.098581 -0.016" 
+        rpy="0 0 0" />
+            <mass value="0.13414" />
+            <inertia ixx="0.00056433" ixy="9.2374E-06" ixz="-4.0143E-22" iyy="1.4535E-05" 
+        iyz="1.6834E-21" izz="0.0005697" />
+        </inertial>
+        <visual name="shoulder_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/shoulder.STL" />
+            </geometry>
+            <material name="SkyBlue">
+                <color rgba="0.529 0.808 0.922 1"/>
+            </material>
+        </visual>
+        <collision name="shoulder_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/shoulder.STL" />
+            </geometry>
+        </collision>
+    </link>
+  
+    <joint name="shoulder_joint" type="revolute">
+        <origin xyz="0.00014449 -0.016 0.0495" rpy="1.5708 0 0" />
+        <parent link="base_link" />
+        <child link="shoulder" />
+        <axis xyz="0 0 1" />
+        <limit lower="-1.396263" upper="1.047198" effort="5" velocity="1" />
+        <dynamics friction="0.01" />
+    </joint>
+  
+    <link name="elbow">
+        <inertial>
+            <origin xyz="0.058753 -0.0010664 -0.010079" 
+        rpy="0 0 0" />
+            <mass value="0.086041" />
+            <inertia ixx="2.3997E-05" ixy="1.6962E-06" ixz="-2.9827E-08" iyy="0.0001221" 
+        iyz="2.313E-10" izz="0.00011083" />
+        </inertial>
+        <visual name="elbow_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/elbow.STL" />
+            </geometry>
+            <material name="SkyBlue">
+                <color rgba="0.529 0.808 0.922 1"/>
+            </material>
+        </visual>
+        <collision name="elbow_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/elbow.STL" />
+            </geometry>
+        </collision>
+    </link>
+  
+    <joint name="elbow_joint" type="revolute">
+        <origin xyz="-0.0033589 0.19997 -0.006" rpy="0 0 0" />
+        <parent link="shoulder" />
+        <child link="elbow" />
+        <axis xyz="0 0 -1" />
+        <limit lower="-2.617994" upper="-0.873" effort="5" velocity="1" />
+        <dynamics friction="0.01" />
+    </joint>
+  
+    <link name="left_gripper">
+        <inertial>
+            <origin xyz="0.048431 0.012936 0.0060259" 
+        rpy="0 0 0" />
+            <mass value="0.024263" />
+            <inertia ixx="3.2848E-06" ixy="-2.1715E-06" ixz="3.043E-08" iyy="2.0859E-05" 
+        iyz="8.128E-09" izz="2.2531E-05" />
+        </inertial>
+        <visual name="left_gripper_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/left_gripper.STL" />
+            </geometry>
+            <material name="red">
+                <color rgba="1 0.5 0.5 1"/>
+            </material>
+        </visual>
+        <collision name="left_gripper_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/left_gripper.STL" />
+            </geometry>
+        </collision>
+    </link>
+  
+    <joint name="left_gripper_joint" type="revolute">
+        <origin xyz="0.098577 0.019132 -0.0175" rpy="-1.5708 0 -0.018987" />
+        <parent link="elbow" />
+        <child link="left_gripper" />
+        <axis xyz="0 0 1" />
+        <limit lower="0" upper="1.047" effort="2" velocity="1" />
+        <dynamics friction="0.01" />
+    </joint>
+
+    <link name="right_gripper">
+        <inertial>
+            <origin xyz="0.048653 -0.012075 0.0060259" 
+        rpy="0 0 0" />
+            <mass value="0.024263" />
+            <inertia ixx="3.2132E-06" ixy="1.8583E-06" ixz="3.057E-08" iyy="2.093E-05" 
+        iyz="-7.5866E-09" izz="2.2531E-05" />
+        </inertial>
+        <visual name="right_gripper_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/right_gripper.STL" />
+            </geometry>
+            <material name="red">
+                <color rgba="1 0.5 0.5 1"/>
+            </material>
+        </visual>
+        <collision name="right_gripper_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/right_gripper.STL" />
+            </geometry>
+        </collision>
+    </link>
+  
+    <joint name="right_gripper_joint" type="revolute">
+        <origin xyz="0.098577 0.019132 -0.0025" rpy="-1.5708 0 -0.018987" />
+        <parent link="elbow" />
+        <child link="right_gripper" />
+        <axis xyz="0 0 1" />
+        <limit lower="-1.047" upper="0" effort="2" velocity="1" />
+        <dynamics friction="0.01" />
+    </joint>
+
+    <gazebo>
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+            <robotSimType>gazebo_ros2_control/DefaultRobotHWSim</robotSimType>
+            <parameters>/home/adithya/ros2_ws/src/object_spawner/config/robot_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <!-- Define joints with interfaces -->
+        <joint name="shoulder_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="elbow_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="left_gripper_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="wheel_1_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <joint name="wheel_2_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <joint name="wheel_3_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <joint name="wheel_4_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+        
+        <joint name="right_gripper_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+    <!-- Transmissions -->
+    <transmission name="shoulder_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="shoulder_joint">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="shoulder_motor">
+            <hardwareInterface>position</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="elbow_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="elbow_joint">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="elbow_motor">
+            <hardwareInterface>position</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="left_gripper_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_gripper_joint">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="left_gripper_motor">
+            <hardwareInterface>position</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="wheel_1_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wheel_1_joint">
+            <hardwareInterface>velocity</hardwareInterface>
+        </joint>
+        <actuator name="wheel_1_motor">
+            <hardwareInterface>velocity</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="wheel_2_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wheel_2_joint">
+            <hardwareInterface>velocity</hardwareInterface>
+        </joint>
+        <actuator name="wheel_2_motor">
+            <hardwareInterface>velocity</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="wheel_3_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wheel_3_joint">
+            <hardwareInterface>velocity</hardwareInterface>
+        </joint>
+        <actuator name="wheel_3_motor">
+            <hardwareInterface>velocity</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="wheel_4_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wheel_4_joint">
+            <hardwareInterface>velocity</hardwareInterface>
+        </joint>
+        <actuator name="wheel_4_motor">
+            <hardwareInterface>velocity</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="right_gripper_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_gripper_joint">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="right_gripper_motor">
+            <hardwareInterface>position</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+        
+    <gazebo reference="dummy_link">
+        <material>Gazebo/SkyBlue</material>
+    </gazebo>
+    <gazebo reference="wheel_1">
+        <material>Gazebo/Black</material> 
+    </gazebo>
+    <gazebo reference="wheel_2">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="wheel_3">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="wheel_4">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="shoulder">
+        <material>Gazebo/SkyBlue</material>
+    </gazebo>
+    <gazebo reference="elbow">
+        <material>Gazebo/SkyBlue</material>
+    </gazebo>
+    <gazebo reference="left_gripper">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <gazebo reference="right_gripper">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+
+</robot>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot name="sphere">
+  <link name="sphere">
+    <inertial>
+        <origin xyz="0.09 0.035 0" rpy="0 0 0" />
+        <mass value="0.113" />
+        <inertia ixx="1.8e-05" ixy="0" ixz="0" iyy="1.8e-05" iyz="0" izz="1.8e-05" />
+    </inertial>
+
+    <visual name="sphere_visual">
+        <origin xyz="0.09 0.035 0" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.032"/>
+        </geometry>
+        <material name="red">
+            <color rgba="1 0.5 0.5 1"/>
+        </material>
+    </visual>
+
+    <collision name="sphere_collision">
+        <origin xyz="0.09 0.035 0" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.02"/>
+        </geometry>
+        <surface>
+            <friction>
+                <ode>
+                    <mu>20.0</mu>          <!-- High friction for better grip -->
+                    <mu2>20.0</mu2>
+                </ode>
+            </friction>
+            <contact>
+                <ode>
+                    <kp>1000.0</kp>
+                    <kd>1.0</kd>
+                    <max_vel>0.05</max_vel> <!-- Slowed down for stability -->
+                    <min_depth>0.001</min_depth>
+                </ode>
+            </contact>
+        </surface>
+    </collision>
+
+    <dynamics>
+        <damping>0.05</damping>           <!-- Increased damping for more stability -->
+        <friction>1.0</friction>
+    </dynamics>
+  </link>
+
+  <gazebo reference="cylinder">
+    <material>Gazebo/Blue</material>
+    <mu1>20.0</mu1>
+    <mu2>20.0</mu2>
+    <kp>1000.0</kp>
+    <kd>1.0</kd>
+    <restitution_coefficient>0.0</restitution_coefficient>
+    <maxContacts>10</maxContacts>
+    <stop_cfm>0.0</stop_cfm>
+    <stop_erp>0.2</stop_erp>
+    <minDepth>0.001</minDepth>
+    <max_vel>0.05</max_vel>
+  </gazebo>
+</robot>

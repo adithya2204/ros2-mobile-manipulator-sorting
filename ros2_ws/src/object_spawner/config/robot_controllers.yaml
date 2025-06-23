@@ -1,0 +1,55 @@
+# controllers.yaml
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    use_sim_time: true
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    left_gripper_position_controller:
+      type: position_controllers/JointGroupPositionController
+    right_gripper_position_controller:
+      type: position_controllers/JointGroupPositionController
+    shoulder_joint_position_controller:
+      type: position_controllers/JointGroupPositionController
+    elbow_joint_position_controller:
+      type: position_controllers/JointGroupPositionController
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+
+left_gripper_position_controller:
+  ros__parameters:
+    joints:
+      - left_gripper_joint
+
+right_gripper_position_controller:
+  ros__parameters:
+    joints:
+      - right_gripper_joint
+
+shoulder_joint_position_controller:
+  ros__parameters:
+    joints:
+      - shoulder_joint
+
+elbow_joint_position_controller:
+  ros__parameters:
+    joints:
+      - elbow_joint
+
+diff_drive_controller:
+  ros__parameters:
+    left_wheel_names: ["wheel_1_joint", "wheel_3_joint"]
+    right_wheel_names: ["wheel_2_joint", "wheel_4_joint"]
+
+    wheel_separation: 0.286
+    wheel_radius: 0.04
+
+    base_frame_id: base_link
+    odom_frame_id: odom
+
+    enable_odom_tf: true
+    publish_odom: true
+
+    cmd_vel_timeout: 0.25
+    use_stamped_vel: false
+    velocity_rolling_window_size: 10

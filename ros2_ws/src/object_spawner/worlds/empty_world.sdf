@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="default">
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <light name="sun" type="directional">
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>1 1 1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.1</linear>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+    </light>
+
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0.0</restitution_coefficient>
+              <threshold>100000</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e8</kp>
+                <kd>1.0</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.0</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Boeing Gazebo Model Attachment Plugin -->
+    <plugin name="boeing_gazebo_model_attachment_plugin" filename="/home/adithya/ros2_ws/install/boeing_gazebo_model_attachment_plugin/lib/libboeing_gazebo_model_attachment_plugin_lib.so">
+      <ros>
+        <namespace>/robot/link_attacher_node</namespace>
+        <remapping>attach:=/robot/link_attacher_node/attach</remapping>
+        <remapping>detach:=/robot/link_attacher_node/detach</remapping>
+      </ros>
+      <robotNamespace>/robot</robotNamespace>
+    </plugin>
+
+  </world>
+</sdf>
