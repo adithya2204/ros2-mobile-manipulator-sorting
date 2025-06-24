@@ -1,40 +1,76 @@
-# Differential Drive Manipulator Robot – huT Labs Internship Project
+# 4-Wheeled 2-DoF Manipulator Robot – ROS 2 Workspace
 
 ## Overview
 
-This repository contains the design and assembly files for a differential drive manipulator robot developed during an internship at huT Labs, Amrita Vishwa Vidyapeetham. The robot is engineered for industrial automation tasks such as pick-and-place and item sorting, and is designed to be simulated and controlled using ROS 2 and Gazebo. The project emphasizes modularity, teleoperation, and simulation-driven validation, enabling safe and efficient testing of robotic kinematics and manipulation strategies in a virtual factory environment.
+This repository contains the ROS 2 workspace (`ros2_ws`) and mechanical design files for a 4-wheeled differential drive robot with a 2-DoF manipulator arm. The robot is designed for industrial automation tasks such as pick-and-place and sorting, and is fully simulated in Gazebo with teleoperation and manipulation capabilities. The ROS 2 packages enable differential drive control, arm and gripper actuation, object attachment/detachment, and keyboard-based teleoperation.
+
+---
+
+## ROS 2 Node and Topic Architecture
+
+The following diagram illustrates the main ROS 2 nodes and topics used in the simulation and control of the robot:
+
+![ROS 2 Node Graph](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/15bd12ea6598bb5278faf53644113a30/b8b20a4d-7339-4074-94ac-bee14d6ca665/b6505559.png)
+
+---
+
+## Key Components
+
+- **Differential Drive Base:** Controlled via `/diff_drive_controller` and `/diff_drive_controller/cmd_vel_unstamped`.
+- **Manipulator Arm:**  
+  - Shoulder joint: `/shoulder_joint_position_controller`
+  - Elbow joint: `/elbow_joint_position_controller`
+- **Grippers:**  
+  - Right gripper: `/right_gripper_position_controller`
+  - Left gripper: `/left_gripper_position_controller`
+- **Teleoperation:**  
+  - Base: `/teleop_twist_keyboard` node
+  - Arm and grippers: `/teleop_robot` node
+- **Attachment Plugin:**  
+  - `/robot/link_attacher_node/boeing_gazebo_model_attachment_plugin` for attaching/detaching objects in Gazebo.
+- **State Publishing:**  
+  - `/joint_state_broadcaster` and `/robot_state_publisher` for joint and robot states.
+
+---
 
 ## Repository Structure
 
 - **manbot/**  
-  Contains the complete robot design and assembly files, including CAD models and URDF descriptions for simulation.
-
+  CAD models and assembly files for the robot (mechanical design)
 - **ros2_ws/**  
-  *(To be added later)* ROS 2 workspace with simulation, control, and teleoperation packages for the robot.
+  ROS 2 workspace with source code, launch files, and simulation packages
 
 ---
 
-## Project Highlights
+## Quick Start
 
-- **Robot Design:**  
-  Four-wheeled differential drive base supporting a 2-DOF manipulator arm with synchronized grippers. All components modeled in SolidWorks and exported for simulation.
+### 1. Build the Workspace
+cd ros2_ws
+colcon build
 
-- **Simulation Environment:**  
-  Robot and a realistic factory floor workspace modeled in Gazebo, including ramps with varying friction coefficients to test mobility and manipulation.
+### 2. Source the Environmentsource /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
 
-- **Control System:**  
-  ROS 2-based teleoperation interface for driving the base and controlling the manipulator arm. Uses diff-drive and joint position controllers, with real-time feedback and visualization.
 
-- **Validation:**  
-  Experiments conducted in simulation to assess teleoperation responsiveness, pick-and-place accuracy, and performance across different terrains.
 
----
+### 3. Launch the Robot in Gazebo
 
-## Applications
 
-- Industrial automation: pick-and-place, sorting, and material handling
-- Robotics research and education
-- Simulation-driven design and validation
+ros2 launch object_spawner robot.launch.py
+
+
+### 4. Teleoperate the Robot
+
+#### Wheel Teleoperation
+
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
+
+
+#### Arm and Gripper Teleoperation
+
+ros2 run custom_teleop teleop_arm_node
+
+
 
 ---
 
@@ -49,8 +85,12 @@ This repository contains the design and assembly files for a differential drive 
 
 ## License
 
-Specify your preferred license here (e.g., MIT, GPL, etc.).
+Apache-2.0
 
 ---
 
-*Note: The ROS2 workspace (`ros2_ws`) for simulation and control will be added in a future update.*
+*This workspace enables full simulation and teleoperation of the 4-wheeled 2-DoF manipulator robot in ROS 2 and Gazebo, supporting further research and development in industrial robotics and automation.*
+
+
+
+
