@@ -1,96 +1,91 @@
-# 4-Wheeled 2-DoF Manipulator Robot – ROS 2 Workspace
+# Differential Drive Mobile Manipulator (4-Wheel, 2-DOF)
 
-## Overview
+This repository contains the simulation framework for the mobile manipulator robot presented in the IEEE conference paper:
 
-This repository contains the ROS 2 workspace (`ros2_ws`) and mechanical design files for a 4-wheeled differential drive robot with a 2-DoF manipulator arm. The robot is designed for industrial automation tasks such as pick-and-place and sorting, and is fully simulated in Gazebo with teleoperation and manipulation capabilities. The ROS 2 packages enable differential drive control, arm and gripper actuation, object attachment/detachment, and keyboard-based teleoperation.
+**Design and Implementation of a Differential Drive Manipulator Robot for Industrial Pickup and Sorting Applications Using ROS2**  
+Adithya Pothula, Medhini V, Hamna Hakkim, Rajesh Kannan Megalingam  
+International Conference on Robotics and Mechatronics (ICRM), 2025
 
----
-
-## ROS 2 Node and Topic Architecture
-
-The following diagram illustrates the main ROS 2 nodes and topics used in the simulation and control of the robot:
-
-![ROS 2 Node Graph](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/15bd12ea6598bb5278faf53644113a30/b8b20a4d-7339-4074-94ac-bee14d6ca665/b6505559.png)
+The work demonstrates the design, modelling, and simulation validation of a differential-drive mobile manipulator for industrial pick-and-place and sorting tasks. The system was designed in SolidWorks, represented using URDF, and evaluated in a ROS2–Gazebo simulation environment prior to hardware realization.
 
 ---
 
-## Key Components
+## Robot Design
 
-- **Differential Drive Base:** Controlled via `/diff_drive_controller` and `/diff_drive_controller/cmd_vel_unstamped`.
-- **Manipulator Arm:**  
-  - Shoulder joint: `/shoulder_joint_position_controller`
-  - Elbow joint: `/elbow_joint_position_controller`
-- **Grippers:**  
-  - Right gripper: `/right_gripper_position_controller`
-  - Left gripper: `/left_gripper_position_controller`
-- **Teleoperation:**  
-  - Base: `/teleop_twist_keyboard` node
-  - Arm and grippers: `/teleop_robot` node
-- **Attachment Plugin:**  
-  - `/robot/link_attacher_node/boeing_gazebo_model_attachment_plugin` for attaching/detaching objects in Gazebo.
-- **State Publishing:**  
-  - `/joint_state_broadcaster` and `/robot_state_publisher` for joint and robot states.
+### SolidWorks Model
+
+![SolidWorks Model](images/Picture1.png)
+
+The robot consists of a differential-drive base and a lightweight 2-DOF manipulator optimized for industrial material handling and sorting operations.
 
 ---
 
-## Repository Structure
+### Simulation Environment
 
-- **manbot/**  
-  CAD models and assembly files for the robot (mechanical design)
-- **ros2_ws/**  
-  ROS 2 workspace with source code, launch files, and simulation packages
+![Simulation Ramps](images/Picture2.png)
 
----
+The Gazebo simulation environment was configured to evaluate:
 
-## Quick Start
-
-### 1. Build the Workspace
-cd ros2_ws
-colcon build
-
-### 2. Source the Environmentsource /opt/ros/humble/setup.bash
-source ~/ros2_ws/install/setup.bash
-
-
-
-### 3. Launch the Robot in Gazebo
-
-
-ros2 launch object_spawner robot.launch.py
-
-
-### 4. Teleoperate the Robot
-
-#### Wheel Teleoperation
-
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
-
-
-#### Arm and Gripper Teleoperation
-
-ros2 run custom_teleop teleop_arm_node
-
-
+- robot mobility and stability  
+- teleoperation performance  
+- interaction with industrial objects  
+- navigation over ramps and uneven surfaces  
 
 ---
 
-## Contributors
+### URDF Structure
 
-- Adithya Pothula (robot design, simulation, and ROS2 integration)
-- Medhini V
-- Hamna Hakkim
-- Dr. Rajesh Kannan Megalingam (faculty advisor)
+![URDF Hierarchy](images/urdf%20hirearchy.png)
 
----
-
-## License
-
-Apache-2.0
+The URDF model represents the full kinematic chain of the mobile manipulator, including base, joints, links, and end-effector, enabling physics-based validation in simulation.
 
 ---
 
-*This workspace enables full simulation and teleoperation of the 4-wheeled 2-DoF manipulator robot in ROS 2 and Gazebo, supporting further research and development in industrial robotics and automation.*
+## Repository Contents
 
+This repository includes:
 
+- URDF robot model and configuration  
+- Gazebo world and simulation setup  
+- ROS2 launch files for robot spawning and control  
+- Teleoperation and interaction configuration  
 
+These elements correspond to the simulation framework described in the published work.
 
+---
+
+## External Dependency
+
+This project uses the Boeing Gazebo Model Attachment Plugin.
+
+Repository link:
+
+https://github.com/boeing/gazebo_model_attachment_plugin
+
+The plugin is included as a submodule and is required for attaching and manipulating objects dynamically within the Gazebo simulation.
+
+---
+
+## Citation
+
+If you use this repository, simulation setup, or design concepts in academic work, please cite:
+
+A. Pothula, V. Medhini, H. Hakkim, and R. K. Megalingam,  
+"Design and Implementation of a Differential Drive Manipulator Robot for Industrial Pickup and Sorting Applications Using ROS2,"  
+2025 International Conference on Robotics and Mechatronics (ICRM).
+
+---
+
+## Authors
+
+Adithya Pothula  
+Medhini V  
+Hamna Hakkim  
+Rajesh Kannan Megalingam  
+
+---
+
+## Notes
+
+This repository is preserved as an archival reference for the published research.  
+Further extensions or derivative systems may exist in separate repositories.
