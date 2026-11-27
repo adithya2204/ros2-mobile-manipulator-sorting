@@ -9,7 +9,7 @@
     <visual name="ramp_visual">
       <origin xyz="0.022435 -0.86209 -0.57911" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/ramp.STL" />
+        <mesh filename="file://$(find object_spawner)/meshes/ramp.STL" />
       </geometry>
       <material name="white">
         <color rgba="0.96471 0.96471 0.95294 1" />
@@ -18,7 +18,7 @@
     <collision name="ramp_collision">
       <origin xyz="0.022435 -0.86209 -0.57911" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/ramp.STL" />
+        <mesh filename="file://$(find object_spawner)/meshes/ramp.STL" />
       </geometry>
     </collision>
   </link>
