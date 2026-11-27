@@ -4,19 +4,53 @@ from launch.actions import ExecuteProcess, RegisterEventHandler
 from launch.event_handlers import OnProcessStart
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
-from ament_index_python.packages import get_package_share_directory
+from ament_index_python.packages import get_package_share_directory, get_package_prefix
 import os
+import re
+import tempfile
 from time import sleep
 from launch.actions import TimerAction
 
 
+# The URDF and world files refer to other files through package placeholders
+# instead of absolute paths, so the workspace can live anywhere:
+#   $(find <pkg>)    -> the package's share directory (meshes, config, ...)
+#   $(prefix <pkg>)  -> the package's install prefix (for plugin libraries)
+_PACKAGE_TOKEN = re.compile(r'\$\((find|prefix) ([A-Za-z0-9_]+)\)')
+
+
+def resolve_package_tokens(text):
+    """Replace $(find pkg) and $(prefix pkg) placeholders with real paths."""
+    def lookup(match):
+        kind, package = match.groups()
+        if kind == 'find':
+            return get_package_share_directory(package)
+        return get_package_prefix(package)
+    return _PACKAGE_TOKEN.sub(lookup, text)
+
+
+def resolved_copy(path, out_dir):
+    """Write a copy of `path` with placeholders resolved and return its path.
+
+    Gazebo and spawn_entity.py read model files from disk, so the resolved
+    text is written to a temporary directory and that copy is used instead.
+    """
+    with open(path, 'r') as infp:
+        text = resolve_package_tokens(infp.read())
+    out_path = os.path.join(out_dir, os.path.basename(path))
+    with open(out_path, 'w') as outfp:
+        outfp.write(text)
+    return out_path
+
+
 def generate_launch_description():
     pkg_share = get_package_share_directory('object_spawner')
-    urdf_path = os.path.join(pkg_share, 'urdf', 'robot.urdf')
-    world_path = os.path.join(pkg_share, 'worlds', 'empty_world.sdf')
-    ramp_pol_urdf = os.path.join(pkg_share,'urdf','ramp_polished.urdf')
-    ramp_conc_urdf = os.path.join(pkg_share,'urdf','ramp_concrete.urdf')
-    ramp_rubber_urdf = os.path.join(pkg_share,'urdf','ramp_rubber.urdf')
+    resolved_dir = tempfile.mkdtemp(prefix='object_spawner_')
+    urdf_path = resolved_copy(os.path.join(pkg_share, 'urdf', 'robot.urdf'), resolved_dir)
+    world_path = resolved_copy(os.path.join(pkg_share, 'worlds', 'empty_world.sdf'), resolved_dir)
+    ramp_pol_urdf = resolved_copy(os.path.join(pkg_share, 'urdf', 'ramp_polished.urdf'), resolved_dir)
+    ramp_conc_urdf = resolved_copy(os.path.join(pkg_share, 'urdf', 'ramp_concrete.urdf'), resolved_dir)
+    ramp_rubber_urdf = resolved_copy(os.path.join(pkg_share, 'urdf', 'ramp_rubber.urdf'), resolved_dir)
     cube_urdf = os.path.join(pkg_share,'urdf','cube.urdf')
     controller_config = PathJoinSubstitution([
         FindPackageShare("object_spawner"),

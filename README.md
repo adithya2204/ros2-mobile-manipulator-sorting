@@ -85,19 +85,18 @@ Objects are "grasped" with the [Boeing Gazebo Model Attachment Plugin](https://g
 
 ## Build
 
-> **The workspace must live at `/home/adithya/ros2_ws`, or the paths must be changed.** The URDFs, the controller-parameter path in `robot.urdf` and the plugin path in `worlds/empty_world.sdf` are absolute paths under `/home/adithya/ros2_ws`. On another machine, rewrite them to your own workspace after cloning (the command is in the block below).
+The workspace can live anywhere. The URDFs and the world file refer to meshes, the controller configuration and the attachment plugin through `$(find <package>)` and `$(prefix <package>)` placeholders. `robot.launch.py` replaces them with real install paths at start-up and passes resolved copies to Gazebo.
 
 ```bash
 git clone --recursive https://github.com/adithya2204/ros2-mobile-manipulator-sorting.git
 cd ros2-mobile-manipulator-sorting/ros2_ws
 
-# Only if your workspace is not /home/adithya/ros2_ws:
-grep -rl "/home/adithya/ros2_ws" src/object_spawner | xargs sed -i "s#/home/adithya/ros2_ws#$PWD#g"
-
 rosdep install --from-paths src --ignore-src -y
-colcon build
+colcon build --symlink-install
 source install/setup.bash
 ```
+
+Meshes and `robot_controllers.yaml` are read from the install space. With `--symlink-install`, edits in `src/` take effect without rebuilding.
 
 ---
 
