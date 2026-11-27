@@ -16,7 +16,7 @@
         <visual name="base_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/base_link.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/base_link.STL" />
             </geometry>
             <material name="SkyBlue">
                 <color rgba="0.529 0.808 0.922 1"/>
@@ -25,7 +25,7 @@
         <collision name="base_link_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/base_link.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/base_link.STL" />
             </geometry>
         </collision>
     </link>
@@ -50,7 +50,7 @@
         <visual name="wheel_1_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_1.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/wheel_1.STL" />
             </geometry>
             <material name="black">
                 <color rgba="0 0 0 1" />
@@ -59,7 +59,7 @@
         <collision name="wheel_1_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_1.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/wheel_1.STL" />
             </geometry>
         </collision>
     </link>
@@ -84,7 +84,7 @@
             <visual name="wheel_2_visual">
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_2.STL" />
+                    <mesh filename="file://$(find object_spawner)/meshes/wheel_2.STL" />
                 </geometry>
                 <material name="black">
                     <color rgba="0 0 0 1" />
@@ -93,7 +93,7 @@
             <collision name="wheel_2_collusion">
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_2.STL" />
+                    <mesh filename="file://$(find object_spawner)/meshes/wheel_2.STL" />
                 </geometry>
             </collision>
     </link>
@@ -118,7 +118,7 @@
         <visual name="wheel_3_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_3.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/wheel_3.STL" />
             </geometry>
             <material name="black">
                 <color rgba="0 0 0 1" />
@@ -130,7 +130,7 @@
         <collision name="wheel_3_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_3.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/wheel_3.STL" />
             </geometry>
         </collision>
     </link>
@@ -155,7 +155,7 @@
         <visual name="wheel_4_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_4.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/wheel_4.STL" />
             </geometry>
             <material name="black">
                 <color rgba="0 0 0 1" />
@@ -164,7 +164,7 @@
         <collision name="wheel_4_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/wheel_4.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/wheel_4.STL" />
             </geometry>
         </collision>
     </link>
@@ -189,7 +189,7 @@
         <visual name="shoulder_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/shoulder.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/shoulder.STL" />
             </geometry>
             <material name="SkyBlue">
                 <color rgba="0.529 0.808 0.922 1"/>
@@ -198,7 +198,7 @@
         <collision name="shoulder_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/shoulder.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/shoulder.STL" />
             </geometry>
         </collision>
     </link>
@@ -223,7 +223,7 @@
         <visual name="elbow_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/elbow.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/elbow.STL" />
             </geometry>
             <material name="SkyBlue">
                 <color rgba="0.529 0.808 0.922 1"/>
@@ -232,7 +232,7 @@
         <collision name="elbow_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/elbow.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/elbow.STL" />
             </geometry>
         </collision>
     </link>
@@ -257,7 +257,7 @@
         <visual name="left_gripper_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/left_gripper.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/left_gripper.STL" />
             </geometry>
             <material name="red">
                 <color rgba="1 0.5 0.5 1"/>
@@ -266,7 +266,7 @@
         <collision name="left_gripper_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/left_gripper.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/left_gripper.STL" />
             </geometry>
         </collision>
     </link>
@@ -291,7 +291,7 @@
         <visual name="right_gripper_visual">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/right_gripper.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/right_gripper.STL" />
             </geometry>
             <material name="red">
                 <color rgba="1 0.5 0.5 1"/>
@@ -300,7 +300,7 @@
         <collision name="right_gripper_collision">
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file:///home/adithya/ros2_ws/src/object_spawner/meshes/right_gripper.STL" />
+                <mesh filename="file://$(find object_spawner)/meshes/right_gripper.STL" />
             </geometry>
         </collision>
     </link>
@@ -319,7 +319,7 @@
             <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher</robot_param_node>
             <robotSimType>gazebo_ros2_control/DefaultRobotHWSim</robotSimType>
-            <parameters>/home/adithya/ros2_ws/src/object_spawner/config/robot_controllers.yaml</parameters>
+            <parameters>$(find object_spawner)/config/robot_controllers.yaml</parameters>
         </plugin>
     </gazebo>
 

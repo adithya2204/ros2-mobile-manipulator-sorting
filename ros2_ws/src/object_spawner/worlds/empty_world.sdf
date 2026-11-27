@@ -63,7 +63,7 @@
     </model>
 
     <!-- Boeing Gazebo Model Attachment Plugin -->
-    <plugin name="boeing_gazebo_model_attachment_plugin" filename="/home/adithya/ros2_ws/install/boeing_gazebo_model_attachment_plugin/lib/libboeing_gazebo_model_attachment_plugin_lib.so">
+    <plugin name="boeing_gazebo_model_attachment_plugin" filename="$(prefix boeing_gazebo_model_attachment_plugin)/lib/libboeing_gazebo_model_attachment_plugin_lib.so">
       <ros>
         <namespace>/robot/link_attacher_node</namespace>
         <remapping>attach:=/robot/link_attacher_node/attach</remapping>
