@@ -11,6 +11,7 @@
   <depend>rclpy</depend>
   <depend>geometry_msgs</depend>
   <depend>std_msgs</depend>
+  <depend>boeing_gazebo_model_attachment_plugin_msgs</depend>
 
   <!-- Test dependencies -->
   <test_depend>ament_copyright</test_depend>
